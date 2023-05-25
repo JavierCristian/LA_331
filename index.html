@@ -23,6 +23,7 @@
         </div>
         <script src="js/qgis2web_expressions.js"></script>
         <script src="js/leaflet.js"></script>
+        <script src="js/multi-style-layer.js"></script>
         <script src="js/leaflet-svg-shape-markers.min.js"></script>
         <script src="js/leaflet.rotatedMarker.js"></script>
         <script src="js/leaflet.pattern.js"></script>
@@ -31,23 +32,24 @@
         <script src="js/rbush.min.js"></script>
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
-        <script src="data/CERRADURAS_INTERIOR_1.js"></script>
-        <script src="data/CERRADURAS_PATIO_2.js"></script>
-        <script src="data/CERRADURAS_ACCESO_3.js"></script>
+        <script src="data/CERRADURAS_PATIO_1.js"></script>
+        <script src="data/CERRADURAS_ACCESO_2.js"></script>
+        <script src="data/MONOMANDO_TINA_3.js"></script>
+        <script src="data/CERRADURAS_INTERIOR_4.js"></script>
         <script>
         var map = L.map('map', {
             zoomControl:true, maxZoom:28, minZoom:17
-        }).fitBounds([[-37.49646784195261,-72.33220372876767],[-37.495194406223,-72.32915975927973]]);
+        }).fitBounds([[-37.49808598847795,-72.33742188946927],[-37.49457715313446,-72.32903414383938]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
         var bounds_group = new L.featureGroup([]);
         function setBounds() {
         }
-        map.createPane('pane_GoogleSatellite_0');
-        map.getPane('pane_GoogleSatellite_0').style.zIndex = 400;
-        var layer_GoogleSatellite_0 = L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
-            pane: 'pane_GoogleSatellite_0',
+        map.createPane('pane_GoogleHybrid_0');
+        map.getPane('pane_GoogleHybrid_0').style.zIndex = 400;
+        var layer_GoogleHybrid_0 = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
+            pane: 'pane_GoogleHybrid_0',
             opacity: 1.0,
             attribution: '<a href="https://www.google.at/permissions/geoguidelines/attr-guide.html">Map data ©2015 Google</a>',
             minZoom: 17,
@@ -55,9 +57,9 @@
             minNativeZoom: 0,
             maxNativeZoom: 20
         });
-        layer_GoogleSatellite_0;
-        map.addLayer(layer_GoogleSatellite_0);
-        function pop_CERRADURAS_INTERIOR_1(feature, layer) {
+        layer_GoogleHybrid_0;
+        map.addLayer(layer_GoogleHybrid_0);
+        function pop_CERRADURAS_PATIO_1(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2"><strong>FECHA</strong><br />' + (feature.properties['FECHA'] !== null ? autolinker.link(feature.properties['FECHA'].toLocaleString()) : '') + '</td>\
@@ -90,78 +92,9 @@
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_CERRADURAS_INTERIOR_1_0() {
+        function style_CERRADURAS_PATIO_1_0() {
             return {
-                pane: 'pane_CERRADURAS_INTERIOR_1',
-                shape: 'diamond',
-                radius: 8.0,
-                opacity: 1,
-                color: 'rgba(61,128,53,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 2.0,
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(84,176,74,1.0)',
-                interactive: true,
-            }
-        }
-        map.createPane('pane_CERRADURAS_INTERIOR_1');
-        map.getPane('pane_CERRADURAS_INTERIOR_1').style.zIndex = 401;
-        map.getPane('pane_CERRADURAS_INTERIOR_1').style['mix-blend-mode'] = 'normal';
-        var layer_CERRADURAS_INTERIOR_1 = new L.geoJson(json_CERRADURAS_INTERIOR_1, {
-            attribution: '',
-            interactive: true,
-            dataVar: 'json_CERRADURAS_INTERIOR_1',
-            layerName: 'layer_CERRADURAS_INTERIOR_1',
-            pane: 'pane_CERRADURAS_INTERIOR_1',
-            onEachFeature: pop_CERRADURAS_INTERIOR_1,
-            pointToLayer: function (feature, latlng) {
-                var context = {
-                    feature: feature,
-                    variables: {}
-                };
-                return L.shapeMarker(latlng, style_CERRADURAS_INTERIOR_1_0(feature));
-            },
-        });
-        bounds_group.addLayer(layer_CERRADURAS_INTERIOR_1);
-        function pop_CERRADURAS_PATIO_2(feature, layer) {
-            var popupContent = '<table>\
-                    <tr>\
-                        <td colspan="2"><strong>FECHA</strong><br />' + (feature.properties['FECHA'] !== null ? autolinker.link(feature.properties['FECHA'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2"><strong>VALE SALID</strong><br />' + (feature.properties['VALE SALID'] !== null ? autolinker.link(feature.properties['VALE SALID'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2"><strong>ENCARGADO</strong><br />' + (feature.properties['ENCARGADO'] !== null ? autolinker.link(feature.properties['ENCARGADO'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2"><strong>MZ</strong><br />' + (feature.properties['MZ'] !== null ? autolinker.link(feature.properties['MZ'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2"><strong>LOTE</strong><br />' + (feature.properties['LOTE'] !== null ? autolinker.link(feature.properties['LOTE'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2"><strong>TIPOLOGIA</strong><br />' + (feature.properties['TIPOLOGIA'] !== null ? autolinker.link(feature.properties['TIPOLOGIA'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2"><strong>Q SOLICITA</strong><br />' + (feature.properties['Q SOLICITA'] !== null ? autolinker.link(feature.properties['Q SOLICITA'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2"><strong>OBSERVACIO</strong><br />' + (feature.properties['OBSERVACIO'] !== null ? autolinker.link(feature.properties['OBSERVACIO'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2"><strong>TIPO</strong><br />' + (feature.properties['TIPO'] !== null ? autolinker.link(feature.properties['TIPO'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>';
-            layer.bindPopup(popupContent, {maxHeight: 400});
-        }
-
-        function style_CERRADURAS_PATIO_2_0() {
-            return {
-                pane: 'pane_CERRADURAS_PATIO_2',
+                pane: 'pane_CERRADURAS_PATIO_1',
                 shape: 'diamond',
                 radius: 8.0,
                 opacity: 1,
@@ -176,26 +109,26 @@
                 interactive: true,
             }
         }
-        map.createPane('pane_CERRADURAS_PATIO_2');
-        map.getPane('pane_CERRADURAS_PATIO_2').style.zIndex = 402;
-        map.getPane('pane_CERRADURAS_PATIO_2').style['mix-blend-mode'] = 'normal';
-        var layer_CERRADURAS_PATIO_2 = new L.geoJson(json_CERRADURAS_PATIO_2, {
+        map.createPane('pane_CERRADURAS_PATIO_1');
+        map.getPane('pane_CERRADURAS_PATIO_1').style.zIndex = 401;
+        map.getPane('pane_CERRADURAS_PATIO_1').style['mix-blend-mode'] = 'normal';
+        var layer_CERRADURAS_PATIO_1 = new L.geoJson(json_CERRADURAS_PATIO_1, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_CERRADURAS_PATIO_2',
-            layerName: 'layer_CERRADURAS_PATIO_2',
-            pane: 'pane_CERRADURAS_PATIO_2',
-            onEachFeature: pop_CERRADURAS_PATIO_2,
+            dataVar: 'json_CERRADURAS_PATIO_1',
+            layerName: 'layer_CERRADURAS_PATIO_1',
+            pane: 'pane_CERRADURAS_PATIO_1',
+            onEachFeature: pop_CERRADURAS_PATIO_1,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.shapeMarker(latlng, style_CERRADURAS_PATIO_2_0(feature));
+                return L.shapeMarker(latlng, style_CERRADURAS_PATIO_1_0(feature));
             },
         });
-        bounds_group.addLayer(layer_CERRADURAS_PATIO_2);
-        function pop_CERRADURAS_ACCESO_3(feature, layer) {
+        bounds_group.addLayer(layer_CERRADURAS_PATIO_1);
+        function pop_CERRADURAS_ACCESO_2(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2"><strong>FECHA</strong><br />' + (feature.properties['FECHA'] !== null ? autolinker.link(feature.properties['FECHA'].toLocaleString()) : '') + '</td>\
@@ -228,9 +161,9 @@
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_CERRADURAS_ACCESO_3_0() {
+        function style_CERRADURAS_ACCESO_2_0() {
             return {
-                pane: 'pane_CERRADURAS_ACCESO_3',
+                pane: 'pane_CERRADURAS_ACCESO_2',
                 shape: 'diamond',
                 radius: 8.0,
                 opacity: 1,
@@ -245,36 +178,205 @@
                 interactive: true,
             }
         }
-        map.createPane('pane_CERRADURAS_ACCESO_3');
-        map.getPane('pane_CERRADURAS_ACCESO_3').style.zIndex = 403;
-        map.getPane('pane_CERRADURAS_ACCESO_3').style['mix-blend-mode'] = 'normal';
-        var layer_CERRADURAS_ACCESO_3 = new L.geoJson(json_CERRADURAS_ACCESO_3, {
+        map.createPane('pane_CERRADURAS_ACCESO_2');
+        map.getPane('pane_CERRADURAS_ACCESO_2').style.zIndex = 402;
+        map.getPane('pane_CERRADURAS_ACCESO_2').style['mix-blend-mode'] = 'normal';
+        var layer_CERRADURAS_ACCESO_2 = new L.geoJson(json_CERRADURAS_ACCESO_2, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_CERRADURAS_ACCESO_3',
-            layerName: 'layer_CERRADURAS_ACCESO_3',
-            pane: 'pane_CERRADURAS_ACCESO_3',
-            onEachFeature: pop_CERRADURAS_ACCESO_3,
+            dataVar: 'json_CERRADURAS_ACCESO_2',
+            layerName: 'layer_CERRADURAS_ACCESO_2',
+            pane: 'pane_CERRADURAS_ACCESO_2',
+            onEachFeature: pop_CERRADURAS_ACCESO_2,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.shapeMarker(latlng, style_CERRADURAS_ACCESO_3_0(feature));
+                return L.shapeMarker(latlng, style_CERRADURAS_ACCESO_2_0(feature));
             },
         });
-        bounds_group.addLayer(layer_CERRADURAS_ACCESO_3);
-        map.addLayer(layer_CERRADURAS_ACCESO_3);
+        bounds_group.addLayer(layer_CERRADURAS_ACCESO_2);
+        function pop_MONOMANDO_TINA_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>FECHA</strong><br />' + (feature.properties['FECHA'] !== null ? autolinker.link(feature.properties['FECHA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>VALE SALID</strong><br />' + (feature.properties['VALE SALID'] !== null ? autolinker.link(feature.properties['VALE SALID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>ENCARGADO</strong><br />' + (feature.properties['ENCARGADO'] !== null ? autolinker.link(feature.properties['ENCARGADO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>MZ</strong><br />' + (feature.properties['MZ'] !== null ? autolinker.link(feature.properties['MZ'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>LOTE</strong><br />' + (feature.properties['LOTE'] !== null ? autolinker.link(feature.properties['LOTE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>TIPOLOGIA</strong><br />' + (feature.properties['TIPOLOGIA'] !== null ? autolinker.link(feature.properties['TIPOLOGIA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Q SOLICITA</strong><br />' + (feature.properties['Q SOLICITA'] !== null ? autolinker.link(feature.properties['Q SOLICITA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>OBSERVACIO</strong><br />' + (feature.properties['OBSERVACIO'] !== null ? autolinker.link(feature.properties['OBSERVACIO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>ESTE</strong><br />' + (feature.properties['ESTE'] !== null ? autolinker.link(feature.properties['ESTE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>NORTE</strong><br />' + (feature.properties['NORTE'] !== null ? autolinker.link(feature.properties['NORTE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_MONOMANDO_TINA_3_0() {
+            return {
+                pane: 'pane_MONOMANDO_TINA_3',
+                radius: 13.2,
+                opacity: 1,
+                color: 'rgba(255,217,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,0,1.0)',
+                interactive: true,
+            }
+        }
+        function style_MONOMANDO_TINA_3_1() {
+            return {
+                pane: 'pane_MONOMANDO_TINA_3',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,0,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_MONOMANDO_TINA_3');
+        map.getPane('pane_MONOMANDO_TINA_3').style.zIndex = 403;
+        map.getPane('pane_MONOMANDO_TINA_3').style['mix-blend-mode'] = 'normal';
+        var layer_MONOMANDO_TINA_3 = new L.geoJson.multiStyle(json_MONOMANDO_TINA_3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_MONOMANDO_TINA_3',
+            layerName: 'layer_MONOMANDO_TINA_3',
+            pane: 'pane_MONOMANDO_TINA_3',
+            onEachFeature: pop_MONOMANDO_TINA_3,
+            pointToLayers: [function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.shapeMarker(latlng, style_MONOMANDO_TINA_3_0(feature));
+            },function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.shapeMarker(latlng, style_MONOMANDO_TINA_3_1(feature));
+            },
+        ]});
+        bounds_group.addLayer(layer_MONOMANDO_TINA_3);
+        function pop_CERRADURAS_INTERIOR_4(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>FECHA</strong><br />' + (feature.properties['FECHA'] !== null ? autolinker.link(feature.properties['FECHA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>VALE SALID</strong><br />' + (feature.properties['VALE SALID'] !== null ? autolinker.link(feature.properties['VALE SALID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>ENCARGADO</strong><br />' + (feature.properties['ENCARGADO'] !== null ? autolinker.link(feature.properties['ENCARGADO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>MZ</strong><br />' + (feature.properties['MZ'] !== null ? autolinker.link(feature.properties['MZ'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>LOTE</strong><br />' + (feature.properties['LOTE'] !== null ? autolinker.link(feature.properties['LOTE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>TIPOLOGIA</strong><br />' + (feature.properties['TIPOLOGIA'] !== null ? autolinker.link(feature.properties['TIPOLOGIA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Q SOLICITA</strong><br />' + (feature.properties['Q SOLICITA'] !== null ? autolinker.link(feature.properties['Q SOLICITA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>CERRADURA</strong><br />' + (feature.properties['CERRADURA'] !== null ? autolinker.link(feature.properties['CERRADURA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>OBSERVACIO</strong><br />' + (feature.properties['OBSERVACIO'] !== null ? autolinker.link(feature.properties['OBSERVACIO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>TIPO</strong><br />' + (feature.properties['TIPO'] !== null ? autolinker.link(feature.properties['TIPO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>ESTE</strong><br />' + (feature.properties['ESTE'] !== null ? autolinker.link(feature.properties['ESTE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>NORTE</strong><br />' + (feature.properties['NORTE'] !== null ? autolinker.link(feature.properties['NORTE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_CERRADURAS_INTERIOR_4_0() {
+            return {
+                pane: 'pane_CERRADURAS_INTERIOR_4',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(133,182,111,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_CERRADURAS_INTERIOR_4');
+        map.getPane('pane_CERRADURAS_INTERIOR_4').style.zIndex = 404;
+        map.getPane('pane_CERRADURAS_INTERIOR_4').style['mix-blend-mode'] = 'normal';
+        var layer_CERRADURAS_INTERIOR_4 = new L.geoJson(json_CERRADURAS_INTERIOR_4, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_CERRADURAS_INTERIOR_4',
+            layerName: 'layer_CERRADURAS_INTERIOR_4',
+            pane: 'pane_CERRADURAS_INTERIOR_4',
+            onEachFeature: pop_CERRADURAS_INTERIOR_4,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_CERRADURAS_INTERIOR_4_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_CERRADURAS_INTERIOR_4);
         var baseMaps = {};
-        L.control.layers(baseMaps,{'<img src="legend/CERRADURAS_ACCESO_3.png" /> CERRADURAS_ACCESO': layer_CERRADURAS_ACCESO_3,'<img src="legend/CERRADURAS_PATIO_2.png" /> CERRADURAS_PATIO': layer_CERRADURAS_PATIO_2,'<img src="legend/CERRADURAS_INTERIOR_1.png" /> CERRADURAS_INTERIOR': layer_CERRADURAS_INTERIOR_1,"Google Satellite": layer_GoogleSatellite_0,}).addTo(map);
+        L.control.layers(baseMaps,{'<img src="legend/CERRADURAS_INTERIOR_4.png" /> CERRADURAS_INTERIOR': layer_CERRADURAS_INTERIOR_4,'<img src="legend/MONOMANDO_TINA_3.png" /> MONOMANDO_TINA': layer_MONOMANDO_TINA_3,'<img src="legend/CERRADURAS_ACCESO_2.png" /> CERRADURAS_ACCESO': layer_CERRADURAS_ACCESO_2,'<img src="legend/CERRADURAS_PATIO_1.png" /> CERRADURAS_PATIO': layer_CERRADURAS_PATIO_1,"Google Hybrid": layer_GoogleHybrid_0,}).addTo(map);
         setBounds();
         var i = 0;
-        layer_CERRADURAS_INTERIOR_1.eachLayer(function(layer) {
+        layer_CERRADURAS_PATIO_1.eachLayer(function(layer) {
             var context = {
                 feature: layer.feature,
                 variables: {}
             };
-            layer.bindTooltip((layer.feature.properties['Q SOLICITA'] !== null?String('<div style="color: #e31a1c; font-size: 10pt; font-family: \'Arial Black\', sans-serif;">' + layer.feature.properties['Q SOLICITA']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_CERRADURAS_INTERIOR_1'});
+            layer.bindTooltip((layer.feature.properties['Q SOLICITA'] !== null?String('<div style="color: #e31a1c; font-size: 10pt; font-family: \'Arial Black\', sans-serif;">' + layer.feature.properties['Q SOLICITA']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_CERRADURAS_PATIO_1'});
             labels.push(layer);
             totalMarkers += 1;
               layer.added = true;
@@ -282,12 +384,12 @@
               i++;
         });
         var i = 0;
-        layer_CERRADURAS_PATIO_2.eachLayer(function(layer) {
+        layer_CERRADURAS_ACCESO_2.eachLayer(function(layer) {
             var context = {
                 feature: layer.feature,
                 variables: {}
             };
-            layer.bindTooltip((layer.feature.properties['Q SOLICITA'] !== null?String('<div style="color: #e31a1c; font-size: 10pt; font-family: \'Arial Black\', sans-serif;">' + layer.feature.properties['Q SOLICITA']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_CERRADURAS_PATIO_2'});
+            layer.bindTooltip((layer.feature.properties['Q SOLICITA'] !== null?String('<div style="color: #e31a1c; font-size: 10pt; font-family: \'Arial Black\', sans-serif;">' + layer.feature.properties['Q SOLICITA']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_CERRADURAS_ACCESO_2'});
             labels.push(layer);
             totalMarkers += 1;
               layer.added = true;
@@ -295,27 +397,27 @@
               i++;
         });
         var i = 0;
-        layer_CERRADURAS_ACCESO_3.eachLayer(function(layer) {
+        layer_MONOMANDO_TINA_3.eachLayer(function(layer) {
             var context = {
                 feature: layer.feature,
                 variables: {}
             };
-            layer.bindTooltip((layer.feature.properties['Q SOLICITA'] !== null?String('<div style="color: #e31a1c; font-size: 10pt; font-family: \'Arial Black\', sans-serif;">' + layer.feature.properties['Q SOLICITA']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_CERRADURAS_ACCESO_3'});
+            layer.bindTooltip((layer.feature.properties['Q SOLICITA'] !== null?String('<div style="color: #e31a1c; font-size: 10pt; font-family: \'Arial Black\', sans-serif;">' + layer.feature.properties['Q SOLICITA']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_MONOMANDO_TINA_3'});
             labels.push(layer);
             totalMarkers += 1;
               layer.added = true;
               addLabel(layer, i);
               i++;
         });
-        resetLabels([layer_CERRADURAS_INTERIOR_1,layer_CERRADURAS_PATIO_2,layer_CERRADURAS_ACCESO_3]);
+        resetLabels([layer_CERRADURAS_PATIO_1,layer_CERRADURAS_ACCESO_2,layer_MONOMANDO_TINA_3]);
         map.on("zoomend", function(){
-            resetLabels([layer_CERRADURAS_INTERIOR_1,layer_CERRADURAS_PATIO_2,layer_CERRADURAS_ACCESO_3]);
+            resetLabels([layer_CERRADURAS_PATIO_1,layer_CERRADURAS_ACCESO_2,layer_MONOMANDO_TINA_3]);
         });
         map.on("layeradd", function(){
-            resetLabels([layer_CERRADURAS_INTERIOR_1,layer_CERRADURAS_PATIO_2,layer_CERRADURAS_ACCESO_3]);
+            resetLabels([layer_CERRADURAS_PATIO_1,layer_CERRADURAS_ACCESO_2,layer_MONOMANDO_TINA_3]);
         });
         map.on("layerremove", function(){
-            resetLabels([layer_CERRADURAS_INTERIOR_1,layer_CERRADURAS_PATIO_2,layer_CERRADURAS_ACCESO_3]);
+            resetLabels([layer_CERRADURAS_PATIO_1,layer_CERRADURAS_ACCESO_2,layer_MONOMANDO_TINA_3]);
         });
         </script>
     </body>
